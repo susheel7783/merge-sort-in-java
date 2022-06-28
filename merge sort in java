@@ -1,0 +1,66 @@
+public class solution {
+public static void merge(int[] s1,int []s2,int[] d){
+// /we  have to merge s1,s2 in d
+    int i=0;
+    int j=0;
+    int k=0;
+    while(i<s1.length && j<s2.length){
+        //first element of s1 s2 compare then copy on d
+        if(s1[i]<s2[j]){
+            d[k]=s1[i];
+            i++;
+            k++;
+        }else{
+            d[k]=s2[j];
+            k++;
+            j++;
+        }
+    }
+    ///suppose some element left in s1 
+    if(i<s1.length){
+        while(i<s1.length){
+            d[k]=s1[i];
+            i++;
+            k++;
+        }
+    }
+    ///suppose some element left in s2 
+   if(j<s2.length){
+       while(j<s2.length){
+           d[k]=s2[j];
+           k++;
+           j++;
+       }
+   } 
+}
+    
+    
+	public static void mergeSort(int[] a){
+		// Write your code here
+        //base case
+        if(a.length<=1){
+            return;
+        }
+        
+        int b[]=new int[a.length/2];   //create two small array to store element of array a
+        int c[]=new int[a.length-a.length/2];
+        
+        //copy element of a in b and c
+		
+        for(int i=0;i<a.length/2;i++){
+            b[i]=a[i];
+        }
+        
+        //copy element of a in c
+        for(int i=a.length/2;i<a.length;i++){
+            c[i-a.length/2]= a[i];               //c[i-a.length/2] so that we can fill element in c from 0 so c will start from 0th index 
+        }
+        
+        //after copying the element of a in b,c call merge sort in b and c separatily
+        mergeSort(b);
+        mergeSort(c);
+        //after sorting both the small array merge both
+        merge(b,c,a);
+	}
+    
+}
